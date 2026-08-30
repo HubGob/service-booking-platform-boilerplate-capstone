@@ -1,0 +1,19 @@
+{
+  "name": "service-booking-platform",
+  "version": "1.0.0",
+  "description": "Full-stack service booking platform — React + Node.js + MongoDB + Stripe",
+  "private": true,
+  "workspaces": [
+    "backend",
+    "frontend"
+  ],
+  "scripts": {
+    "install:all": "npm install",
+    "dev": "concurrently \"npm run dev --workspace=backend\" \"npm run dev --workspace=frontend\"",
+    "build": "npm run build --workspace=frontend"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2",
+    "supertest": "^7.2.2"
+  }
+}
