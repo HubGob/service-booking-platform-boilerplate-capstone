@@ -1,0 +1,8 @@
+.dashboard { min-height: 100vh; padding: 2rem; max-width: 900px; margin: 0 auto; }
+.dashboard h1 { margin-bottom: 2rem; }
+.dash-section { background: var(--card); border-radius: 12px; padding: 1.5rem; border: 1px solid var(--border); margin-bottom: 2rem; }
+.dash-section h2 { margin-bottom: 1rem; color: var(--accent); font-size: 1.2rem; }
+.services-list, .avail-list, .bookings-list { display: flex; flex-direction: column; gap: 0.75rem; margin-top: 1rem; }
+.service-item, .avail-item, .booking-item { display: flex; justify-content: space-between; align-items: center; padding: 0.75rem; background: var(--muted); border-radius: 8px; }
+.booking-time { color: var(--muted-foreground); font-size: 0.9rem; }
+.empty-state { color: var(--muted-foreground); font-style: italic; padding: 1rem 0; }
