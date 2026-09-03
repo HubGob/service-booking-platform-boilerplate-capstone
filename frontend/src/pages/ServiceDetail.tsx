@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useParams, Link, useNavigate } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import Header from '../components/Header';
 import { useAuth } from '../context/AuthContext';
 import { Service, AvailabilitySlot, Booking } from '../types';
@@ -8,7 +8,6 @@ import './ServiceDetail.css';
 const ServiceDetail = (): JSX.Element => {
   const { id } = useParams<{ id: string }>();
   const { user, isAuthenticated } = useAuth();
-  const navigate = useNavigate();
   const [service, setService] = useState<Service | null>(null);
   const [availability, setAvailability] = useState<AvailabilitySlot[]>([]);
   const [selectedSlot, setSelectedSlot] = useState<string | null>(null);
@@ -26,7 +25,7 @@ const ServiceDetail = (): JSX.Element => {
           const availRes = await fetch(`api/availability/provider/${svcRes.provider._id}`).then(r => r.json());
           setAvailability(availRes.availability || []);
         }
-      } catch (err) {
+      } catch (_err) {
         setError('Failed to load service');
       } finally {
         setLoading(false);
@@ -58,8 +57,8 @@ const ServiceDetail = (): JSX.Element => {
       const data = await res.json();
       if (!res.ok) throw new Error(data.message || 'Booking failed');
       setBooking(data.booking);
-    } catch (err: any) {
-      setError(err.message || 'Booking failed');
+    } catch (_err: any) {
+      setError(_err.message || 'Booking failed');
     }
   };
 

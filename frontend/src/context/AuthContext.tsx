@@ -56,7 +56,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }): JSX.Element
 
   const logout = useCallback(async (): Promise<void> => {
     const rt = localStorage.getItem('refreshToken');
-    if (rt) { try { await api.post('/api/auth/logout', { refreshToken: rt }); } catch (e) {} }
+    if (rt) { try { await api.post('/api/auth/logout', { refreshToken: rt }); } catch (_e) {} }
     localStorage.removeItem('accessToken');
     localStorage.removeItem('refreshToken');
     setUser(null);

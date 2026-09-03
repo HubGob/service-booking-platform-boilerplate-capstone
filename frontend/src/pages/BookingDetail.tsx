@@ -17,7 +17,7 @@ const BookingDetail = (): JSX.Element => {
         if (!res.ok) throw new Error('Not found');
         const data = await res.json();
         setBooking(data);
-      } catch (err) {
+      } catch (_err) {
         alert('Booking not found');
         navigate('/bookings');
       } finally {

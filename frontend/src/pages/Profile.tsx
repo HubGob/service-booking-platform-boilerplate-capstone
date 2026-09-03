@@ -14,7 +14,7 @@ const Profile = (): JSX.Element => {
     try {
       setProfile(prev => prev ? { ...prev, ...fields } : prev);
       alert('Profile updated (local only — add PUT /api/users endpoint for server-side)');
-    } catch (err) {
+    } catch (_err) {
       alert('Failed to update profile');
     } finally {
       setLoading(false);

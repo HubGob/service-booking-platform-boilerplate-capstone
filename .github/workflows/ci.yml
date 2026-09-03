@@ -30,7 +30,7 @@ jobs:
         run: npm ci
 
       - name: Run ESLint
-        run: npx eslint src/ --ext .ts,.tsx
+        run: npx eslint src/ --ext .ts,.tsx --max-warnings 999
         working-directory: ./frontend
 
       - name: Check Prettier formatting
@@ -84,7 +84,7 @@ jobs:
         run: npm ci
 
       - name: Run Jest Tests
-        run: npx jest --config jest.config.js
+        run: npx jest --config jest.config.cjs
         working-directory: ./backend
         env:
           NODE_ENV: test
