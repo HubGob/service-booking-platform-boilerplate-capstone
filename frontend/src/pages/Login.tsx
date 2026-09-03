@@ -30,10 +30,26 @@ const Login = (): JSX.Element => {
       <form className="auth-form" onSubmit={handleSubmit}>
         <h2>Login</h2>
         {error && <p className="error">{error}</p>}
-        <input type="email" placeholder="Email" value={email} onChange={e => setEmail(e.target.value)} required />
-        <input type="password" placeholder="Password" value={password} onChange={e => setPassword(e.target.value)} required />
-        <button type="submit" disabled={loading}>{loading ? 'Logging in...' : 'Login'}</button>
-        <p>Don&apos;t have an account? <Link to="/register">Register</Link></p>
+        <input
+          type="email"
+          placeholder="Email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          required
+        />
+        <input
+          type="password"
+          placeholder="Password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          required
+        />
+        <button type="submit" disabled={loading}>
+          {loading ? 'Logging in...' : 'Login'}
+        </button>
+        <p>
+          Don&apos;t have an account? <Link to="/register">Register</Link>
+        </p>
       </form>
     </div>
   );

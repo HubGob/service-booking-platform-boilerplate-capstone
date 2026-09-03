@@ -1,10 +1,39 @@
 .header {
-  display: flex; justify-content: space-between; align-items: center;
-  padding: 1rem 2rem; background: var(--card); border-bottom: 1px solid var(--border);
-  position: sticky; top: 0; z-index: 100;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background: var(--card);
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  z-index: 100;
 }
-.logo { font-size: 1.5rem; font-weight: 700; color: var(--accent); text-decoration: none; }
-.nav { display: flex; gap: 1.5rem; align-items: center; }
-.nav a { color: var(--foreground); text-decoration: none; font-weight: 500; }
-.nav-profile { font-weight: 600; color: var(--accent) !important; }
-.btn-logout { background: none; border: 1px solid var(--border); padding: 0.4rem 1rem; border-radius: 8px; cursor: pointer; color: var(--foreground); }
+.logo {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--accent);
+  text-decoration: none;
+}
+.nav {
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+}
+.nav a {
+  color: var(--foreground);
+  text-decoration: none;
+  font-weight: 500;
+}
+.nav-profile {
+  font-weight: 600;
+  color: var(--accent) !important;
+}
+.btn-logout {
+  background: none;
+  border: 1px solid var(--border);
+  padding: 0.4rem 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  color: var(--foreground);
+}

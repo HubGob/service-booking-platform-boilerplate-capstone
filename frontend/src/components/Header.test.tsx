@@ -57,7 +57,13 @@ describe('Header', () => {
 
   it('shows user links when authenticated', () => {
     vi.mocked(useAuth).mockReturnValue({
-      user: { _id: '1', id: '1', name: 'Gabrielle', email: 'gab@example.com', role: 'client' },
+      user: {
+        _id: '1',
+        id: '1',
+        name: 'Gabrielle',
+        email: 'gab@example.com',
+        role: 'client',
+      },
       isAuthenticated: true,
       loading: false,
       login: vi.fn(),
@@ -78,7 +84,13 @@ describe('Header', () => {
 
   it('shows provider dashboard link for provider role', () => {
     vi.mocked(useAuth).mockReturnValue({
-      user: { _id: '1', id: '1', name: 'Gabrielle', email: 'gab@example.com', role: 'provider' },
+      user: {
+        _id: '1',
+        id: '1',
+        name: 'Gabrielle',
+        email: 'gab@example.com',
+        role: 'provider',
+      },
       isAuthenticated: true,
       loading: false,
       login: vi.fn(),

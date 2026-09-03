@@ -18,11 +18,18 @@ interface ProtectedRouteProps {
   allowedRoles?: Array<'client' | 'provider'>;
 }
 
-const ProtectedRoute = ({ children, allowedRoles }: ProtectedRouteProps): JSX.Element => {
+const ProtectedRoute = ({
+  children,
+  allowedRoles,
+}: ProtectedRouteProps): JSX.Element => {
   const { isAuthenticated, loading, user } = useAuth();
   if (loading) return <LoadingSpinner />;
   if (!isAuthenticated) return <Navigate to="/login" replace />;
-  if (allowedRoles && !allowedRoles.includes(user?.role as 'client' | 'provider')) return <Navigate to="/" replace />;
+  if (
+    allowedRoles &&
+    !allowedRoles.includes(user?.role as 'client' | 'provider')
+  )
+    return <Navigate to="/" replace />;
   return children as JSX.Element;
 };
 
@@ -36,10 +43,38 @@ const App = (): JSX.Element => (
           <Route path="/register" element={<Register />} />
           <Route path="/services" element={<Services />} />
           <Route path="/services/:id" element={<ServiceDetail />} />
-          <Route path="/bookings" element={<ProtectedRoute><Bookings /></ProtectedRoute>} />
-          <Route path="/bookings/:id" element={<ProtectedRoute><BookingDetail /></ProtectedRoute>} />
-          <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
-          <Route path="/dashboard" element={<ProtectedRoute allowedRoles={['provider']}><ProviderDashboard /></ProtectedRoute>} />
+          <Route
+            path="/bookings"
+            element={
+              <ProtectedRoute>
+                <Bookings />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/bookings/:id"
+            element={
+              <ProtectedRoute>
+                <BookingDetail />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/profile"
+            element={
+              <ProtectedRoute>
+                <Profile />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/dashboard"
+            element={
+              <ProtectedRoute allowedRoles={['provider']}>
+                <ProviderDashboard />
+              </ProtectedRoute>
+            }
+          />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </Suspense>

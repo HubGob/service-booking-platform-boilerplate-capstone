@@ -27,7 +27,15 @@ const BookingDetail = (): JSX.Element => {
     load();
   }, [id, navigate]);
 
-  if (loading) return <><Header /><div className="spinner-container"><div className="spinner" /></div></>;
+  if (loading)
+    return (
+      <>
+        <Header />
+        <div className="spinner-container">
+          <div className="spinner" />
+        </div>
+      </>
+    );
   if (!booking) return null as unknown as JSX.Element;
 
   return (
@@ -35,15 +43,42 @@ const BookingDetail = (): JSX.Element => {
       <Header />
       <h1>Booking Details</h1>
       <div className="detail-card">
-        <div className="detail-row"><label>Service</label><span>{booking.service?.title || 'N/A'}</span></div>
-        <div className="detail-row"><label>Provider</label><span>{booking.provider?.name || 'N/A'}</span></div>
-        <div className="detail-row"><label>Client</label><span>{booking.client?.name || 'N/A'}</span></div>
-        <div className="detail-row"><label>Date & Time</label><span>{new Date(booking.startTime).toLocaleString()}</span></div>
-        <div className="detail-row"><label>Total</label><span className="total">${booking.totalPrice}</span></div>
-        <div className="detail-row"><label>Status</label><span className={`status-badge status-${booking.status}`}>{booking.status}</span></div>
-        {booking.notes && <div className="detail-row"><label>Notes</label><span>{booking.notes}</span></div>}
+        <div className="detail-row">
+          <label>Service</label>
+          <span>{booking.service?.title || 'N/A'}</span>
+        </div>
+        <div className="detail-row">
+          <label>Provider</label>
+          <span>{booking.provider?.name || 'N/A'}</span>
+        </div>
+        <div className="detail-row">
+          <label>Client</label>
+          <span>{booking.client?.name || 'N/A'}</span>
+        </div>
+        <div className="detail-row">
+          <label>Date & Time</label>
+          <span>{new Date(booking.startTime).toLocaleString()}</span>
+        </div>
+        <div className="detail-row">
+          <label>Total</label>
+          <span className="total">${booking.totalPrice}</span>
+        </div>
+        <div className="detail-row">
+          <label>Status</label>
+          <span className={`status-badge status-${booking.status}`}>
+            {booking.status}
+          </span>
+        </div>
+        {booking.notes && (
+          <div className="detail-row">
+            <label>Notes</label>
+            <span>{booking.notes}</span>
+          </div>
+        )}
       </div>
-      <Link to="/bookings" className="btn-back">Back to Bookings</Link>
+      <Link to="/bookings" className="btn-back">
+        Back to Bookings
+      </Link>
     </div>
   );
 };

@@ -13,15 +13,23 @@ const Header = (): JSX.Element => {
 
   return (
     <header className="header">
-      <Link to="/" className="logo">BookService</Link>
+      <Link to="/" className="logo">
+        BookService
+      </Link>
       <nav className="nav">
         <Link to="/services">Browse Services</Link>
         {isAuthenticated && (
           <>
             <Link to="/bookings">My Bookings</Link>
-            {user?.role === 'provider' && <Link to="/dashboard">Dashboard</Link>}
-            <Link to="/profile" className="nav-profile">{user?.name}</Link>
-            <button className="btn-logout" onClick={handleLogout}>Logout</button>
+            {user?.role === 'provider' && (
+              <Link to="/dashboard">Dashboard</Link>
+            )}
+            <Link to="/profile" className="nav-profile">
+              {user?.name}
+            </Link>
+            <button className="btn-logout" onClick={handleLogout}>
+              Logout
+            </button>
           </>
         )}
       </nav>

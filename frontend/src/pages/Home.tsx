@@ -7,8 +7,8 @@ const Home = (): JSX.Element => {
   const [featured, setFeatured] = useState<Service[]>([]);
   useEffect(() => {
     fetch('api/services?limit=6')
-      .then(res => res.json())
-      .then(data => setFeatured(data.services || []))
+      .then((res) => res.json())
+      .then((data) => setFeatured(data.services || []))
       .catch(() => {});
   }, []);
 
@@ -36,15 +36,21 @@ const Home = (): JSX.Element => {
       <section className="features grid grid-cols-1 md:grid-cols-3 gap-8 py-16 px-4 max-w-6xl mx-auto">
         <div className="text-center p-8 bg-card rounded-xl border border-border">
           <h3 className="text-accent mb-2">Browse by Category</h3>
-          <p className="text-muted-foreground">Tutoring, consulting, design, development, and more.</p>
+          <p className="text-muted-foreground">
+            Tutoring, consulting, design, development, and more.
+          </p>
         </div>
         <div className="text-center p-8 bg-card rounded-xl border border-border">
           <h3 className="text-accent mb-2">Book a Slot</h3>
-          <p className="text-muted-foreground">See provider availability and pick a time that works.</p>
+          <p className="text-muted-foreground">
+            See provider availability and pick a time that works.
+          </p>
         </div>
         <div className="text-center p-8 bg-card rounded-xl border border-border">
           <h3 className="text-accent mb-2">Secure Payments</h3>
-          <p className="text-muted-foreground">Pay with Stripe — safe and simple.</p>
+          <p className="text-muted-foreground">
+            Pay with Stripe — safe and simple.
+          </p>
         </div>
       </section>
 
@@ -55,7 +61,7 @@ const Home = (): JSX.Element => {
             Featured Services
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {featured.map(s => (
+            {featured.map((s) => (
               <a
                 key={s._id}
                 href={`/services/${s._id}`}
@@ -68,14 +74,22 @@ const Home = (): JSX.Element => {
                     className="w-12 h-12 rounded-full object-cover mb-4"
                   />
                 )}
-                <h3 className="font-semibold text-lg text-foreground mb-1">{s.title}</h3>
-                <p className="text-muted-foreground text-sm capitalize mb-2">{s.category}</p>
+                <h3 className="font-semibold text-lg text-foreground mb-1">
+                  {s.title}
+                </h3>
+                <p className="text-muted-foreground text-sm capitalize mb-2">
+                  {s.category}
+                </p>
                 <p className="text-sm text-muted-foreground mb-4">
                   {s.description.substring(0, 80)}...
                 </p>
                 <div className="flex justify-between items-center">
-                  <span className="text-xl font-bold text-accent">${s.price}</span>
-                  <span className="text-sm text-muted-foreground">{s.durationMinutes} min</span>
+                  <span className="text-xl font-bold text-accent">
+                    ${s.price}
+                  </span>
+                  <span className="text-sm text-muted-foreground">
+                    {s.durationMinutes} min
+                  </span>
                 </div>
               </a>
             ))}
