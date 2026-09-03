@@ -1,5 +1,8 @@
 # Service Booking Platform
 
+[![CI](https://github.com/HubGob/service-booking-platform-boilerplate-capstone/actions/workflows/ci.yml/badge.svg)](https://github.com/HubGob/service-booking-platform-boilerplate-capstone/actions/workflows/ci.yml)
+[![CD](https://github.com/HubGob/service-booking-platform-boilerplate-capstone/actions/workflows/cd.yml/badge.svg)](https://github.com/HubGob/service-booking-platform-boilerplate-capstone/actions/workflows/cd.yml)
+
 A full-stack service booking platform — React (Vite) frontend, Node.js/Express REST API, MongoDB (Mongoose), Stripe test-mode payments.
 
 ## Features
@@ -13,10 +16,13 @@ A full-stack service booking platform — React (Vite) frontend, Node.js/Express
 
 ## Tech Stack
 
-- **Frontend:** React 18, React Router v6 (lazy loading + Suspense), Vite, Axios
+- **Frontend:** React 18, React Router v6 (lazy loading + Suspense), Vite, Axios, Tailwind CSS
 - **Backend:** Node.js, Express, Mongoose, jsonwebtoken, bcryptjs, Stripe
 - **Database:** MongoDB Atlas (M0 free tier)
 - **Deployment:** Vercel (frontend) + Render (backend)
+- **Code Quality:** ESLint, Prettier
+- **Testing:** Jest + Supertest (backend), Vitest + React Testing Library (frontend), mongodb-memory-server
+- **CI/CD:** GitHub Actions (CI on push/PR, CD on merge to main)
 
 ## Quick Start (Development)
 
@@ -134,3 +140,47 @@ Open `http://localhost:5173` — the Vite dev server proxies `/api` requests to 
 ## License
 
 MIT
+
+## Development
+
+### Code Quality
+
+```bash
+# Frontend lint & format
+npm run lint --workspace=frontend
+npm run format:check --workspace=frontend
+
+# Backend lint & format
+npm run lint --workspace=backend
+npm run format:check --workspace=backend
+```
+
+### Tests
+
+```bash
+# Frontend tests (Vitest + React Testing Library)
+npm run test:run --workspace=frontend
+npm run test:coverage --workspace=frontend
+
+# Backend tests (Jest + Supertest + mongodb-memory-server)
+npm test --workspace=backend
+```
+
+### CI/CD
+
+This project uses GitHub Actions for automated testing and deployment:
+
+- **CI workflow** (`.github/workflows/ci.yml`): Runs on every push/PR to `main`
+  - Lints and checks formatting (frontend + backend)
+  - Type checks all TypeScript
+  - Runs backend tests (Jest) and frontend tests (Vitest)
+  - Builds both frontend and backend
+
+- **CD workflow** (`.github/workflows/cd.yml`): Runs on push to `main` or manual trigger
+  - Builds the frontend with Vite
+  - Deploys frontend to Vercel
+  - Triggers backend deploy on Render
+
+Set the following as GitHub repository secrets for CD:
+- `VERCEL_TOKEN`, `VERCEL_ORG_ID`, `VERCEL_PROJECT_ID`
+- `RENDER_SERVICE_ID`, `RENDER_API_KEY`

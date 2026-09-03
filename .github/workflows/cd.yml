@@ -1,0 +1,69 @@
+name: CD
+
+# This workflow deploys to production after CI passes.
+# Deployments are triggered manually OR automatically on push to main.
+# Add 'workflow_dispatch' to allow manual triggering from the Actions tab.
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+env:
+  NODE_VERSION: 20
+  # Set these as GitHub Secrets in your repo settings:
+  # - VERCEL_TOKEN
+  # - VERCEL_ORG_ID
+  # - VERCEL_PROJECT_ID
+  # - RENDER_SERVICE_ID
+  # - RENDER_API_KEY
+
+jobs:
+  # Note: CI runs as a separate workflow (ci.yml) on the same push.
+  # This CD workflow does not depend on CI's result directly;
+  # in practice, CI should pass first. You can enforce this with
+  # a status check branch protection rule in GitHub Settings.
+  deploy:
+    name: Deploy to Production
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      # ─────────────────────────────────────────────────────────────
+      # 1. Deploy Frontend to Vercel
+      # ─────────────────────────────────────────────────────────────
+      - name: Install Vercel CLI
+        run: npm install -g vercel
+
+      - name: Build & Deploy Frontend
+        run: npx vite build
+        working-directory: ./frontend
+
+      - name: Deploy to Vercel
+        run: vercel --prod --token=${{ secrets.VERCEL_TOKEN }} --scope=${{ secrets.VERCEL_ORG_ID }} --project=${{ secrets.VERCEL_PROJECT_ID }}
+        working-directory: ./frontend
+
+      # ─────────────────────────────────────────────────────────────
+      # 2. Deploy Backend to Render
+      # ─────────────────────────────────────────────────────────────
+      # Render auto-deploys on push to the connected branch.
+      # For manual deployment, you can trigger via Render's API:
+      - name: Trigger Render Deploy
+        run: |
+          curl -X POST \
+            "https://api.render.com/deploy/${{ secrets.RENDER_SERVICE_ID }}" \
+            -H "Authorization: Bearer ${{ secrets.RENDER_API_KEY }}"
+        if: secrets.RENDER_SERVICE_ID != ''
+
+      - name: Deployment Complete
+        run: echo "✅ Deployment finished. Check Vercel & Render dashboards for status."

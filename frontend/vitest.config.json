@@ -1,0 +1,14 @@
+{
+  "test": {
+    "environment": "jsdom",
+    "globals": true,
+    "setupFiles": ["../src/setupTests.ts"],
+    "css": true,
+    "coverage": {
+      "provider": "v8",
+      "reporter": ["text", "lcov"]
+    },
+    "include": ["src/**/*.{test,spec}.{ts,tsx}"],
+    "mockReset": true
+  }
+}
