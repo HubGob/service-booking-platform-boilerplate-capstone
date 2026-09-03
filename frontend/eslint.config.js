@@ -30,7 +30,7 @@ export default ts.config(
     },
     settings: {
       react: {
-        version: 'detection',
+        version: 'detect',
       },
     },
     rules: {
